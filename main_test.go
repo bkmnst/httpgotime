@@ -16,7 +16,12 @@ func TestGreet(t *testing.T) {
 
 	body := w.Body.String()
 
-	if !strings.Contains(body, "Hello World!") {
-		t.Error("response does not contain Hello World!")
+	if !strings.Contains(body, "<title>World Clocks</title>") {
+		t.Error("response does not contain HTML title")
+	}
+
+	count := strings.Count(body, "<div class=\"city\">")
+	if count != 10 {
+		t.Errorf("expected 10 clocks, got %d", count)
 	}
 }
